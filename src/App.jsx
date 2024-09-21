@@ -12,9 +12,10 @@ import BookingsPage from './pages/BookingsPage'
 import BookingPage from './pages/BookingPage'
 
 import axios from 'axios'
+import 'dotenv/config'
 import { UserContextProvider } from './UserContext'
 
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = process.env.VITE_API_URL;
 axios.defaults.withCredentials = true ;
 
 function App() {
