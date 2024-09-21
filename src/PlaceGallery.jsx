@@ -1,5 +1,5 @@
 import { useState } from "react";
-import 'dotenv/config'
+
 
 export default function PlaceGallery({place}) {
     const [showAllPhotos ,setShowAllPhotos] = useState(false);
@@ -18,7 +18,7 @@ export default function PlaceGallery({place}) {
                     </div>
                     {place?.photos?.length > 0 && place.photos.map(photo => (
                         <div>
-                            <img className="" src={process.env.VITE_API_URL + "/uploads/"+photo} alt="" />
+                            <img className="" src={import.meta.env.VITE_API_URL + "/uploads/"+photo} alt="" />
                         </div>
                     ))}
                 </div>
@@ -31,16 +31,16 @@ export default function PlaceGallery({place}) {
                 <div className="grid gap-2 grid-cols-[2fr_1fr] rounded-xl overflow-hidden">
                     <div>
                         {place.photos?.[0] && (
-                            <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer aspect-square object-cover" src={process.env.VITE_API_URL +"/uploads/"+place.photos[0]} alt="" />
+                            <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer aspect-square object-cover" src={import.meta.env.VITE_API_URL +"/uploads/"+place.photos[0]} alt="" />
                         )}
                     </div>
                     <div className="grid">
                         {place.photos?.[1] && (
-                            <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer aspect-square object-cover" src={process.env.VITE_API_URL +"/uploads/"+place.photos[1]} alt="" />
+                            <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer aspect-square object-cover" src={import.meta.env.VITE_API_URL +"/uploads/"+place.photos[1]} alt="" />
                         )}
                         <div className="overflow-hidden">
                             {place.photos?.[2] && (
-                                <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer aspect-square object-cover relative top-2" src={process.env.VITE_API_URL +"/uploads/"+place.photos[2]} alt="" />
+                                <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer aspect-square object-cover relative top-2" src={import.meta.env.VITE_API_URL +"/uploads/"+place.photos[2]} alt="" />
                             )}
                         </div>
                     </div>
