@@ -28,7 +28,7 @@ export default function PlaceGallery({place}) {
 
     return(
         <div className="relative">
-                <div className="grid gap-2 grid-cols-[2fr_1fr] h-[75vh] max-h-[75vh] rounded-xl overflow-hidden">
+                <div className="grid gap-2 grid-cols-[2fr_1fr] h-[75vh] max-h-screen rounded-xl overflow-hidden">
                     <div>
                         {place.photos?.[0] && (
                             <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer h-full w-full object-cover" src={import.meta.env.VITE_API_URL +"/uploads/"+place.photos[0]} alt="" />
@@ -36,11 +36,11 @@ export default function PlaceGallery({place}) {
                     </div>
                     <div className="grid grid-rows-[1fr_1fr] gap-2 h-full">
                         {place.photos?.[1] && (
-                            <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer h-full w-full object-cover" src={import.meta.env.VITE_API_URL +"/uploads/"+place.photos[1]} alt="" />
+                            <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer h-full w-full object-cover aspect-square" src={import.meta.env.VITE_API_URL +"/uploads/"+place.photos[1]} alt="" />
                         )}
                         <div className="overflow-hidden">
                             {place.photos?.[2] && (
-                                <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer h-full w-full object-cover" src={import.meta.env.VITE_API_URL +"/uploads/"+place.photos[2]} alt="" />
+                                <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer h-full w-full object-cover aspect-square" src={import.meta.env.VITE_API_URL +"/uploads/"+place.photos[2]} alt="" />
                             )}
                         </div>
                     </div>
