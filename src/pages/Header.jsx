@@ -66,7 +66,7 @@ export default function Header() {
             </div>
           )}
           { clicked && (
-            <div className='flex items-center gap-2 border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-gray-200'>
+            <div className='relative flex items-center gap-2 border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-gray-200'>
               <input type="text" className="border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-gray-200" 
                      value={input}
                      placeholder="Search places..." 
