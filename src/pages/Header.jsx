@@ -67,7 +67,7 @@ export default function Header() {
           )}
           { clicked && (
             <div className='relative flex items-center gap-2 border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-gray-200'>
-              <input type="text" className="border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-gray-200" 
+              <input type="text" className="border-none outline-none flex-grow py-2 px-4" 
                      value={input}
                      placeholder="Search places..." 
                      onChange={handleInput}/>
@@ -77,7 +77,7 @@ export default function Header() {
                 </svg>
               </button>
               {filteredPlace.length > 0 && (
-                <ul className="absolute top-full left-0 w-full mt-2 border border-gray-300 rounded-lg bg-white shadow-lg z-10 max-h-40 overflow-y-auto">
+                <ul className="absolute top-full left-0 w-full mt-1 border border-gray-300 rounded-lg bg-white shadow-md z-10 max-h-40 overflow-y-auto">
                   {filteredPlace.map(place => (
                     <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                       {place.title}
