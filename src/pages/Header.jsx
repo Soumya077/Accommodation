@@ -21,16 +21,18 @@ export default function Header() {
       setClick(prevState => !prevState );
     }
 
-    function handleInput(ev){
-      const query = ev.target.value ;
+    const handleInput = debounce((ev) => {
+      const query = ev.target.value;
       setInput(query);
-      if(query){
-        const filtered = places.filter(place => ( place.title.toLowerCase().includes(query.toLowerCase()) ) )
+      if (query) {
+        const filtered = places.filter(place =>
+          place.title.toLowerCase().includes(query.toLowerCase())
+        );
         setFilteredPlace(filtered);
-      }else{
+      } else {
         setFilteredPlace([]);
       }
-    }
+    }, 300);
 
     return(
         <header className='flex justify-between'>
