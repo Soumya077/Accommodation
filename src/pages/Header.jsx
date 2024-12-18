@@ -1,9 +1,22 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../UserContext";
 
 export default function Header() {
     const {user} = useContext(UserContext);
+    const [places,setPlaces] = useState([]);
+    const [clicked,setClick] = useState(false);
+ 
+    useEffect(() => {
+        axios.get('/user-places').then(({data}) =>{
+            setPlaces(data);
+        });
+    } , []);
+
+    function searchPlace(params) {
+      clicked = true ;
+    }
+
     return(
         <header className='flex justify-between'>
         <NavLink to={'/'} className="flex items-center gap-1">
@@ -14,16 +27,29 @@ export default function Header() {
           <span className="font-bold text-xl">Homefeel</span>
         </NavLink>
         <div className='flex items-center gap-2 border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-gray-200'>
-          <div >Anywhere</div>
-          <div className="border-l border-gray-200"></div>
-          <div >Any week</div>
-          <div className="border-l border-gray-200"></div>
-          <div >Add guests</div>
-          <button className="rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
-          </button>
+          if(!clicked){
+            <div>
+              <div >Anywhere</div>
+              <div className="border-l border-gray-200"></div>
+              <div >Any week</div>
+              <div className="border-l border-gray-200"></div>
+              <div >Add guests</div>
+              <button className="rounded-full" onClick={searchPlace}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+              </button>
+            </div>
+          }else{
+            <div>
+              <input type="text"/>
+              <button className="rounded-full" onClick={searchPlace}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+              </button>
+            </div>
+          }
         </div> 
 
         <NavLink to={user? '/account':'/login'} className='flex items-center gap-2 border border-gray-400 rounded-full py-2 px-4'>
