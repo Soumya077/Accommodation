@@ -2,6 +2,7 @@ import { useContext, useState,useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import axios from "axios";
+import debounce from "lodash.debounce";
 
 export default function Header() {
     const {user} = useContext(UserContext);
@@ -11,7 +12,7 @@ export default function Header() {
     const [filteredPlace , setFilteredPlace] = useState([]);
  
     useEffect(() => {
-        axios.get('/user-places').then(({data}) =>{
+        axios.get('/places').then(({data}) =>{
             setPlaces(data);
         });
     } , []);
