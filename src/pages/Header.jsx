@@ -21,18 +21,25 @@ export default function Header() {
       setClick(prevState => !prevState );
     }
 
-    const handleInput = debounce((ev) => {
+    const debouncedFilter = useCallback(
+      debounce((query) => {
+        if (query) {
+          const filtered = places.filter(place =>
+            place.title.toLowerCase().includes(query.toLowerCase())
+          );
+          setFilteredPlace(filtered);
+        } else {
+          setFilteredPlace([]);
+        }
+      }, 300),
+      [places]
+    );
+  
+    const handleInput = (ev) => {
       const query = ev.target.value;
-      setInput(query);
-      if (query) {
-        const filtered = places.filter(place =>
-          place.title.toLowerCase().includes(query.toLowerCase())
-        );
-        setFilteredPlace(filtered);
-      } else {
-        setFilteredPlace([]);
-      }
-    }, 300);
+      setInput(query); // Update input immediately
+      debouncedFilter(query); // Debounce filtering
+    };
 
     return(
         <header className='flex justify-between'>
