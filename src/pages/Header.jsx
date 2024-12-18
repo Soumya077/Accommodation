@@ -15,7 +15,10 @@ export default function Header() {
     } , []);
 
     function searchPlace(params) {
-      clicked = true ;
+      setClick(prevState => !prevState );
+      // if(clicked){
+
+      // }
     }
 
     return(
@@ -28,7 +31,7 @@ export default function Header() {
           <span className="font-bold text-xl">Homefeel</span>
         </NavLink>
         <div className='flex items-center gap-2 border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-gray-200'>
-          if(!clicked){
+          {!clicked && (
             <div>
               <div >Anywhere</div>
               <div className="border-l border-gray-200"></div>
@@ -41,7 +44,8 @@ export default function Header() {
                 </svg>
               </button>
             </div>
-          }else{
+          )}
+          { clicked && (
             <div>
               <input type="text"/>
               <button className="rounded-full" onClick={searchPlace}>
@@ -50,7 +54,7 @@ export default function Header() {
                 </svg>
               </button>
             </div>
-          }
+          )}
         </div> 
 
         <NavLink to={user? '/account':'/login'} className='flex items-center gap-2 border border-gray-400 rounded-full py-2 px-4'>
