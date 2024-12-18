@@ -1,6 +1,7 @@
 import { useContext, useState,useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../UserContext";
+import axios from "axios";
 
 export default function Header() {
     const {user} = useContext(UserContext);
