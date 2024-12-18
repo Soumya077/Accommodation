@@ -5,8 +5,10 @@ import axios from "axios";
 
 export default function Header() {
     const {user} = useContext(UserContext);
+    const [input, setInput] = useState('');
     const [places,setPlaces] = useState([]);
     const [clicked,setClick] = useState(false);
+    const [filteredPlace , setFilteredPlace] = useState([]);
  
     useEffect(() => {
         axios.get('/user-places').then(({data}) =>{
@@ -14,11 +16,19 @@ export default function Header() {
         });
     } , []);
 
-    function searchPlace(params) {
+    function searchPlace() {
       setClick(prevState => !prevState );
-      // if(clicked){
+    }
 
-      // }
+    function handleInput(ev){
+      const query = ev.target.value ;
+      setInput(query);
+      if(query){
+        const filtered = places.filter(place => ( place.title.toLowerCase().includes(query.toLowerCase()) ) )
+        setFilteredPlace(filtered);
+      }else{
+        setFilteredPlace([]);
+      }
     }
 
     return(
@@ -47,12 +57,24 @@ export default function Header() {
           )}
           { clicked && (
             <div className='flex items-center gap-2 border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-gray-200'>
-              <input type="text"/>
+              <input type="text" className="border border-gray-400 rounded-full py-2 px-4 shadow-md shadow-gray-200" 
+                     value={input}
+                     placeholder="Search places..." 
+                     onChange={handleInput}/>
               <button className="rounded-full" onClick={searchPlace}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
               </button>
+              {filteredPlace.length > 0 && (
+                <ul>
+                  {filteredPlace.map(place => (
+                    <li className="border border-gray-400">
+                      {place.title}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           )}
         </div> 
