@@ -79,9 +79,11 @@ export default function Header() {
               {filteredPlace.length > 0 && (
                 <ul className="absolute top-full left-0 w-full mt-1 border border-gray-300 rounded-lg bg-white shadow-md z-10 max-h-40 overflow-y-auto">
                   {filteredPlace.map(place => (
-                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                      {place.title}
-                    </li>
+                    <NavLink to={'/account/places/' + place._id}>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                        {place.title}
+                      </li>
+                    </NavLink>
                   ))}
                 </ul>
               )}
